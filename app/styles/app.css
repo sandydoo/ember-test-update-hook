@@ -1,0 +1,21 @@
+html {
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.button {
+  display: block;
+  margin-bottom: 1em;
+  padding: .5em;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.updates {
+  height: 500px;
+  overflow-y: auto;
+}
+
+.update {
+  color: red;
+}

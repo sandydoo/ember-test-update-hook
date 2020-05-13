@@ -1,3 +1,49 @@
-<h2 id="title">Welcome to Ember</h2>
+<h2 id="title">Update hook test</h2>
 
-{{outlet}}
+<p>
+  <b>Expectation</b>: the update hook is fired on a component when its arguments are modified. <br>
+
+  <b>Reality</b>: in \{{each}} and \{{each-in}} blocks, the update hook is fired for all other components <i>except</i> for the one being modified. <br>
+</p>
+
+<div style="display: flex;">
+  <div style="width: 60%;">
+
+    <h3>Update single component in each-in block</h3>
+
+    <button class="button" {{on 'click' this.updateMap}}>Update</button>
+
+    {{#each-in this.testMap as |key value|}}
+      <Test @key={{key}} @value={{value}} />
+      <br>
+    {{/each-in}}
+
+
+    <h3>Update single component in each block</h3>
+
+    <button class="button" {{on 'click' this.updateArray}}>Update</button>
+
+    {{#each this.testArray as |value key|}}
+      <Test @key={{key}} @value={{value}} />
+      <br>
+    {{/each}}
+
+
+    <h3>Update single component</h3>
+
+    <button class="button" {{on 'click' this.updateSingle}}>Update</button>
+
+    <Test @key="single" @value={{this.singleValue}} />
+  </div>
+
+  <div style="width: 40%;">
+    <h4>Updates</h4>
+
+    <div class="updates">
+      {{#each this.logService.log as |event|}}
+        <p class="{{if event.type "update"}}">{{event.message}}</p>
+      {{/each}}
+    </div>
+  </div>
+
+</div>
