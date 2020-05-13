@@ -4,8 +4,8 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'ember-test-update-hook',
     environment,
-    rootURL: '/',
-    locationType: 'auto',
+    rootURL: '/dist-3-18',
+    locationType: 'none',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
