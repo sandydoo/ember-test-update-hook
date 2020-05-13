@@ -4,7 +4,7 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'ember-test-update-hook',
     environment,
-    rootURL: '/dist-3-16',
+    rootURL: '/ember-test-update-hook-rendered/dist-3-16',
     locationType: 'none',
     EmberENV: {
       FEATURES: {
