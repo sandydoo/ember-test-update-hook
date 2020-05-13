@@ -1,11 +1,9 @@
 import { capabilities } from '@ember/component';
 import { getOwner, setOwner } from '@ember/application';
-import { schedule } from '@ember/runloop';
+import { join } from '@ember/runloop';
 
 export default class CustomComponentManager {
   capabilities = capabilities('3.13', {
-    asyncLifecycleCallbacks: true,
-    destructor: true,
     updateHook: true
   });
 
@@ -15,20 +13,18 @@ export default class CustomComponentManager {
     this.log = owner.lookup('service:log');
   }
 
-  createComponent(ComponentClass, args) {
-    return new ComponentClass(getOwner(this), args.named);
-  }
+  createComponent(Factory, args) {
+    let component = new Factory(args.named);
 
-  didCreateComponent() {}
+    setOwner(component, getOwner(this));
+
+    return component;
+  }
 
   updateComponent(component, args) {
     let index = args.named.key;
-    schedule('render', this, () => this.log.append(false, `Update hook called for ${index}`));
+    join(this, () => this.log.append(false, `Update hook called for ${index}`));
   }
-
-  didUpdateComponent() {}
-
-  destroyComponent() {}
 
   getContext(component) {
     return component;
